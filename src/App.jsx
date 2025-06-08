@@ -1,5 +1,11 @@
+import Sidebar from "./components/Sidebar"
+
 function App() {
-  return <h1 className="ml-6">Hello world</h1>
+  return (
+    <div>
+      <Sidebar />
+    </div>
+  )
 }
 
 export default App
