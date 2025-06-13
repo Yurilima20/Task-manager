@@ -5,7 +5,9 @@ import SunIcon from "../assets/icons/sun.svg?react"
 import CloudSun from "../assets/icons/cloud-sun.svg?react"
 import MoonIcon from "../assets/icons/moon.svg?react"
 import TasksSeparator from "./TasksSeparator"
+import { useState } from "react"
 import TASKS from "../constants/tasks"
+import TaskItem from "./TaskItem"
 
 const Tasks = () => {
   const [tasks] = useState(TASKS)
