@@ -1,8 +1,10 @@
 import CheckIconc from "../assets/icons/check.svg?react"
 import LoaderIcon from "../assets/icons/loader.svg?react"
 import DatailIcon from "../assets/icons/details.svg?react"
+import Button from "./Button"
+import TrashIcon from "../assets/icons/trash.svg?react"
 
-const TaskItem = ({ tasks, handleTaskCheckboxClick }) => {
+const TaskItem = ({ tasks, handleTaskCheckboxClick, handleDeleteClick }) => {
   const getStatusClasses = () => {
     if (tasks.status === "done") {
       return "bg-[#00ADB5]  text-[#00ADB5]"
@@ -39,10 +41,15 @@ const TaskItem = ({ tasks, handleTaskCheckboxClick }) => {
 
         {tasks.title}
       </div>
+      <div className="flex items-center gap-2">
+        <Button variant="ghost" onClick={() => handleDeleteClick(tasks.id)}>
+          <TrashIcon className="text-[#9A9C9F]" />
+        </Button>
 
-      <a href="#" className="transition hover:opacity-75">
-        <DatailIcon />
-      </a>
+        <a href="#" className="transition hover:opacity-75">
+          <DatailIcon />
+        </a>
+      </div>
     </div>
   )
 }

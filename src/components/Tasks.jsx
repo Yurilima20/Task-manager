@@ -8,6 +8,7 @@ import TasksSeparator from "./TasksSeparator"
 import { useState } from "react"
 import TASKS from "../constants/tasks"
 import TaskItem from "./TaskItem"
+import { toast } from "sonner"
 
 const Tasks = () => {
   const [tasks, setTasks] = useState(TASKS)
@@ -16,6 +17,12 @@ const Tasks = () => {
   const afternoonTasks = tasks.filter((tasks) => tasks.time === "afternoon")
   const eveningTasks = tasks.filter((tasks) => tasks.time === "evening")
 
+  const handleTaskDeleteClick = (taskID) => {
+    const newTasks = tasks.filter((task) => task.id !== taskID)
+    setTasks(newTasks)
+    toast.success("Tarefa removida com sucesso!")
+  }
+
   const handleTaskCheckboxClick = (taskID) => {
     const newTasks = tasks.map((task) => {
       if (task.id !== taskID) {
@@ -23,13 +30,16 @@ const Tasks = () => {
       }
 
       if (task.status === "not_started") {
+        toast.success("Tarefa iniciada com sucesso!")
         return { ...task, status: "in_progress" }
       }
       if (task.status === "in_progress") {
+        toast.success("Tarefa concluída com sucesso!")
         return { ...task, status: "done" }
       }
 
       if (task.status === "done") {
+        toast.info("Tarefa reiniciada com sucesso!")
         return { ...task, status: "not_started" }
       }
 
@@ -67,6 +77,7 @@ const Tasks = () => {
               key={task.id}
               tasks={task}
               handleTaskCheckboxClick={handleTaskCheckboxClick}
+              handleDeleteClick={handleTaskDeleteClick}
             />
           ))}
         </div>
@@ -78,6 +89,7 @@ const Tasks = () => {
               key={task.id}
               tasks={task}
               handleTaskCheckboxClick={handleTaskCheckboxClick}
+              handleDeleteClick={handleTaskDeleteClick}
             />
           ))}
         </div>
@@ -89,6 +101,7 @@ const Tasks = () => {
               key={task.id}
               tasks={task}
               handleTaskCheckboxClick={handleTaskCheckboxClick}
+              handleDeleteClick={handleTaskDeleteClick}
             />
           ))}
         </div>
