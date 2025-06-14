@@ -2,7 +2,7 @@ import CheckIconc from "../assets/icons/check.svg?react"
 import LoaderIcon from "../assets/icons/loader.svg?react"
 import DatailIcon from "../assets/icons/details.svg?react"
 
-const TaskItem = ({ tasks, handleTaskCheckboxClcik }) => {
+const TaskItem = ({ tasks, handleTaskCheckboxClick }) => {
   const getStatusClasses = () => {
     if (tasks.status === "done") {
       return "bg-[#00ADB5]  text-[#00ADB5]"
@@ -26,10 +26,10 @@ const TaskItem = ({ tasks, handleTaskCheckboxClcik }) => {
           className={`relative flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg ${getStatusClasses()}`}
         >
           <input
-            type="checkboc"
+            type="checkbox"
             checked={tasks.status === "done"}
             className="absolute h-full w-full cursor-pointer opacity-0"
-            onChange={() => handleTaskCheckboxClcik(tasks.id)}
+            onClick={() => handleTaskCheckboxClick(tasks.id)}
           />
           {tasks.status === "done" && <CheckIconc />}
           {tasks.status === "in_progress" && (

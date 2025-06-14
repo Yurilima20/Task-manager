@@ -40,7 +40,7 @@ const TASKS = [
   },
 
   {
-    id: 5,
+    id: 6,
     title: "meditar",
     description: "Meditar durante 10 minutos",
     time: "evening",
