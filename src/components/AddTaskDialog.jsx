@@ -17,13 +17,18 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
 
   useEffect(() => {
     if (!isOpen) {
-      setTime("")
+      setTime("morning")
       setTitle("")
       setDescription("")
     }
   }, [isOpen])
 
   const handleSaveClick = () => {
+    if (!title.trim() || !time.trim() || !description.trim()) {
+      alert("Por favor, preencha todos os campos.")
+      return
+    }
+
     handleSubmit({
       id: v4(),
       title: title,
