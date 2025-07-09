@@ -13,11 +13,15 @@ import AddTaskDialog from "./AddTaskDialog"
 
 const Tasks = () => {
   const [tasks, setTasks] = useState(TASKS)
-  const [addTaskDialofgOpen, setAddTaskDialogOpen] = useState(false)
+  const [addTaskDialisgOpen, setAddTaskDialogOpen] = useState(false)
 
   const morningTasks = tasks.filter((tasks) => tasks.time === "morning")
   const afternoonTasks = tasks.filter((tasks) => tasks.time === "afternoon")
   const eveningTasks = tasks.filter((tasks) => tasks.time === "evening")
+
+  const handleDialogClose = () => {
+    setAddTaskDialogOpen(false)
+  }
 
   const handleTaskDeleteClick = (taskID) => {
     const newTasks = tasks.filter((task) => task.id !== taskID)
@@ -65,10 +69,13 @@ const Tasks = () => {
             <TrashIcon />
             Limpar Tarefas
           </Button>
-          <Button onClick={() => setAddTaskDialogOpen(false)}>
+          <Button onClick={() => setAddTaskDialogOpen(true)}>
             <AddIcon /> Novas Tarefas
           </Button>
-          <AddTaskDialog isOpen={setAddTaskDialogOpen} />
+          <AddTaskDialog
+            isOpen={addTaskDialisgOpen}
+            handleClose={handleDialogClose}
+          />
         </div>
       </div>
 
