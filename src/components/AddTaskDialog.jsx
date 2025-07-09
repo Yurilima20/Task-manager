@@ -4,6 +4,7 @@ import "./AddTaskDialog.css"
 import Button from "./Button"
 import Input from "./Input"
 import { useRef } from "react"
+import TimeSelect from "./TimeSelect"
 
 const AddTaskDialog = ({ isOpen, handleClose }) => {
   const nodeRef = useRef()
@@ -37,7 +38,7 @@ const AddTaskDialog = ({ isOpen, handleClose }) => {
                   label="Título"
                   placeholder="Insira o título da tarefa"
                 />
-                <Input id="time" label="Horário" placeholder="horário" />
+                <TimeSelect />
                 <Input
                   id="description"
                   label="Descrição"
