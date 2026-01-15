@@ -1,5 +1,5 @@
-import InputLabel from "./InputLabel"
 import InputErrorMessage from "./InputErrorMessage"
+import InputLabel from "./inputLabel"
 
 const TimeSelect = (props) => {
   return (
