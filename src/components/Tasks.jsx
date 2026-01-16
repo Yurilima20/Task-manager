@@ -83,13 +83,22 @@ const Tasks = () => {
             Limpar Tarefas
           </Button>
 
-          <Button onClick={() => setAddTaskDialogOpen(true)}>
+          <Button
+            onClick={
+              () =>
+                setAddTaskDialogOpen(
+                  true
+                ) /* podemos passar funções assim , ideal para funções pequenas */
+            }
+          >
             <AddIcon /> Novas Tarefas
           </Button>
 
           <AddTaskDialog
             isOpen={addTaskDialisgOpen}
-            handleClose={handleDialogClose}
+            handleClose={
+              handleDialogClose
+            } /* podemos passar funções assim tbm, mais trablhadas desenvolvidas lá em cima */
             handleSubmit={handleAddTaskSubmit}
           />
         </div>
