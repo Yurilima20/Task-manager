@@ -1,6 +1,7 @@
-import InputLabel from "./inputLabel"
-import InputErrorMessage from "./InputErrorMessage"
 import { forwardRef } from "react"
+
+import InputErrorMessage from "./InputErrorMessage"
+import InputLabel from "./inputLabel"
 
 const Input = forwardRef(({ label, errorMessage, ...rest }, ref) => {
   return (
@@ -8,7 +9,7 @@ const Input = forwardRef(({ label, errorMessage, ...rest }, ref) => {
       <InputLabel htmlFor={rest.id}>{label}</InputLabel>
 
       <input
-        className="rounded-lg border border-gray-300 px-4 py-3 outline-[#00ADB5] placeholder:text-sm placeholder:text-[#9a9f9b]"
+        className="rounded-lg border border-brand-border px-4 py-3 outline-brand-primary placeholder:text-sm placeholder:text-[#9a9f9b]"
         ref={ref}
         {...rest}
       />

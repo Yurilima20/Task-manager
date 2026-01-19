@@ -4,6 +4,6 @@
 
 @layer base {
   body {
-    @apply bg-[#f8f8f8];
+    @apply bg-brand-background;
   }
 }
