@@ -1,12 +1,14 @@
+import "./AddTaskDialog.css"
+
+import { useState } from "react"
+import { useRef } from "react"
 import { createPortal } from "react-dom"
 import { CSSTransition } from "react-transition-group"
-import { useEffect, useState } from "react"
-import "./AddTaskDialog.css"
+import { v4 } from "uuid"
+
 import Button from "./Button"
 import Input from "./Input"
-import { useRef } from "react"
 import TimeSelect from "./TimeSelect"
-import { v4 } from "uuid"
 
 const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
   const [errors, setErros] = useState([])
@@ -36,12 +38,14 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
       })
     }
 
-    if (!time.trim()) {
+    if (time === "morning") {
       newErrors.push({
         inputName: "time",
         message: "O horário é obrigatório.",
       })
     }
+
+    console.log(newErrors)
 
     setErros(newErrors)
 
