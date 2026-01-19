@@ -2,6 +2,8 @@
 import LoaderIcon from "../assets/icons/loader.svg?react"
 import DatailIcon from "../assets/icons/details.svg?react"
 import TrashIcon from "../assets/icons/trash.svg?react"*/
+import PropTypes from "prop-types"
+
 import {
   CheckIconc,
   DatailIcon,
@@ -58,6 +60,18 @@ const TaskItem = ({ tasks, handleTaskCheckboxClick, handleDeleteClick }) => {
       </div>
     </div>
   )
+}
+
+TaskItem.propTypes = {
+  tasks: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    time: PropTypes.oneOf(["morning", "afternoon", "evening"]).isRequired,
+    status: PropTypes.oneOf(["not_started", "in_progress", "done"]).isRequired,
+  }).isRequired,
+  handleTaskCheckboxClick: PropTypes.func.isRequired,
+  handleDeleteClick: PropTypes.func.isRequired,
 }
 
 export default TaskItem
