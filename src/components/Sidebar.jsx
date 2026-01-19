@@ -17,11 +17,11 @@ const Sidebar = () => {
       </div>
 
       <div className="flex flex-col gap-2 p-2">
-        <SidebarButton variant="unselected" className="text-brand-primary">
+        <SidebarButton color="unselected" className="text-brand-primary">
           <HomeIcon />
           Início
         </SidebarButton>
-        <SidebarButton variant="selected" className="text-brand-primary">
+        <SidebarButton color="selected" className="text-brand-primary">
           <TaskIcon />
           Minhas Tarefas
         </SidebarButton>
