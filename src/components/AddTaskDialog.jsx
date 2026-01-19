@@ -1,5 +1,6 @@
 import "./AddTaskDialog.css"
 
+import PropTypes from "prop-types"
 import { useState } from "react"
 import { useRef } from "react"
 import { createPortal } from "react-dom"
@@ -134,6 +135,12 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
       </div>
     </CSSTransition>
   )
+}
+
+AddTaskDialog.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 }
 
 export default AddTaskDialog
