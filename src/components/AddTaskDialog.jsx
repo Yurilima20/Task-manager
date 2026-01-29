@@ -39,7 +39,7 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
       })
     }
 
-    if (time === "morning") {
+    if (!time.trim()) {
       newErrors.push({
         inputName: "time",
         message: "O horário é obrigatório.",
