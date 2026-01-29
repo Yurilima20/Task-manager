@@ -37,10 +37,6 @@ const Tasks = () => {
   const afternoonTasks = tasks.filter((tasks) => tasks.time === "afternoon")
   const eveningTasks = tasks.filter((tasks) => tasks.time === "evening")
 
-  const handleDialogClose = () => {
-    setAddTaskDialogOpen(false)
-  }
-
   const handleTaskDeleteClick = (taskID) => {
     const newTasks = tasks.filter((task) => task.id !== taskID)
     setTasks(newTasks)
@@ -72,7 +68,15 @@ const Tasks = () => {
     setTasks(newTasks)
   }
 
-  const handleAddTaskSubmit = (task) => {
+  const handleAddTaskSubmit = async (task) => {
+    //chamar a aPI para adicionar a tarefa
+    const response = await fetch("http://localhost:3000/tasks", {
+      method: "POST",
+      body: JSON.stringify(task),
+    })
+    if (!response.ok) {
+      return toast.error("Erro ao adicionar tarefa. Please try again.")
+    }
     setTasks([...tasks, task])
     toast.success("Tarefa adicionada com sucesso!")
   }
@@ -107,7 +111,10 @@ const Tasks = () => {
           <AddTaskDialog
             isOpen={addTaskDialisgOpen}
             handleClose={
-              handleDialogClose
+              () =>
+                setAddTaskDialogOpen(
+                  false
+                ) /* podemos passar funções assim , ideal para funções pequenas */
             } /* podemos passar funções assim tbm, mais trablhadas desenvolvidas lá em cima */
             handleSubmit={handleAddTaskSubmit}
           />
