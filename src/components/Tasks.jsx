@@ -37,7 +37,13 @@ const Tasks = () => {
   const afternoonTasks = tasks.filter((tasks) => tasks.time === "afternoon")
   const eveningTasks = tasks.filter((tasks) => tasks.time === "evening")
 
-  const handleTaskDeleteClick = (taskID) => {
+  const handleTaskDeleteClick = async (taskID) => {
+    const response = await fetch(`http://localhost:3000/tasks/${taskID}`, {
+      method: "DELETE",
+    })
+    if (!response.ok) {
+      return toast.error("Erro ao remover tarefa. Please try again.")
+    }
     const newTasks = tasks.filter((task) => task.id !== taskID)
     setTasks(newTasks)
     toast.success("Tarefa removida com sucesso!")
@@ -70,9 +76,8 @@ const Tasks = () => {
 
   const handleAddTaskSubmit = async (task) => {
     //chamar a aPI para adicionar a tarefa
-    const response = await fetch("http://localhost:3000/tasks", {
+    const response = await fetch(`http://localhost:3000/tasks/${task.id}`, {
       method: "POST",
-      body: JSON.stringify(task),
     })
     if (!response.ok) {
       return toast.error("Erro ao adicionar tarefa. Please try again.")
