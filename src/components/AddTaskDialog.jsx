@@ -7,19 +7,27 @@ import { createPortal } from "react-dom"
 import { CSSTransition } from "react-transition-group"
 import { v4 } from "uuid"
 
+import { LoaderIcon } from "../assets/icons"
 import Button from "./Button"
 import Input from "./Input"
 import TimeSelect from "./TimeSelect"
 
-const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
+const AddTaskDialog = ({
+  isOpen,
+  handleClose,
+  onSubmitSucess,
+  onSubmitError,
+}) => {
   const [errors, setErros] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
   const nodeRef = useRef()
   const titleRef = useRef()
   const descriptionRef = useRef()
   const timeRef = useRef()
 
-  const handleSaveClick = () => {
+  const handleSaveClick = async () => {
+    setIsLoading(true)
     const newErrors = []
 
     const title = titleRef.current.value
@@ -51,17 +59,29 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
     setErros(newErrors)
 
     if (newErrors.length > 0) {
-      return
+      return setIsLoading(false)
     }
 
-    handleSubmit({
+    //chamar a aPI para adicionar a tarefa
+    const task = {
       id: v4(),
-      title: title,
-      time: time,
-      description: description,
+      title,
+      time,
+      description,
       status: "not_started",
-    })
+    }
 
+    const response = await fetch("http://localhost:3000/tasks", {
+      method: "POST",
+      body: JSON.stringify(task),
+    })
+    if (!response.ok) {
+      setIsLoading(false)
+      return onSubmitError()
+    }
+
+    onSubmitSucess(task)
+    setIsLoading(false)
     handleClose()
   }
 
@@ -123,7 +143,9 @@ const AddTaskDialog = ({ isOpen, handleClose, handleSubmit }) => {
                     size="large"
                     className="w-full"
                     onClick={handleSaveClick}
+                    disabled={isLoading}
                   >
+                    {isLoading && <LoaderIcon className="mr-2 animate-spin" />}
                     Salvar
                   </Button>
                 </div>

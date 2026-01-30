@@ -68,16 +68,13 @@ const Tasks = () => {
     setTasks(newTasks)
   }
 
-  const handleAddTaskSubmit = async (task) => {
-    //chamar a aPI para adicionar a tarefa
-    const response = await fetch(`http://localhost:3000/tasks/${task.id}`, {
-      method: "POST",
-    })
-    if (!response.ok) {
-      return toast.error("Erro ao adicionar tarefa. Please try again.")
-    }
+  const onTaskSubmitSucess = (task) => {
     setTasks([...tasks, task])
     toast.success("Tarefa adicionada com sucesso!")
+  }
+
+  const onTaskSubmitError = () => {
+    toast.error("Erro ao adicionar tarefa. Please try again.")
   }
 
   return (
@@ -115,7 +112,8 @@ const Tasks = () => {
                   false
                 ) /* podemos passar funções assim , ideal para funções pequenas */
             } /* podemos passar funções assim tbm, mais trablhadas desenvolvidas lá em cima */
-            handleSubmit={handleAddTaskSubmit}
+            onSubmitSucess={onTaskSubmitSucess}
+            onSubmitError={onTaskSubmitError}
           />
         </div>
       </div>
