@@ -37,13 +37,7 @@ const Tasks = () => {
   const afternoonTasks = tasks.filter((tasks) => tasks.time === "afternoon")
   const eveningTasks = tasks.filter((tasks) => tasks.time === "evening")
 
-  const handleTaskDeleteClick = async (taskID) => {
-    const response = await fetch(`http://localhost:3000/tasks/${taskID}`, {
-      method: "DELETE",
-    })
-    if (!response.ok) {
-      return toast.error("Erro ao remover tarefa. Please try again.")
-    }
+  const onDeleteTaskSucess = (taskID) => {
     const newTasks = tasks.filter((task) => task.id !== taskID)
     setTasks(newTasks)
     toast.success("Tarefa removida com sucesso!")
@@ -134,7 +128,7 @@ const Tasks = () => {
               key={task.id}
               tasks={task}
               handleTaskCheckboxClick={handleTaskCheckboxClick}
-              handleDeleteClick={handleTaskDeleteClick}
+              onDeleteSucess={onDeleteTaskSucess}
             />
           ))}
         </div>
@@ -146,7 +140,7 @@ const Tasks = () => {
               key={task.id}
               tasks={task}
               handleTaskCheckboxClick={handleTaskCheckboxClick}
-              handleDeleteClick={handleTaskDeleteClick}
+              onDeleteSucess={onDeleteTaskSucess}
             />
           ))}
         </div>
@@ -158,7 +152,7 @@ const Tasks = () => {
               key={task.id}
               tasks={task}
               handleTaskCheckboxClick={handleTaskCheckboxClick}
-              handleDeleteClick={handleTaskDeleteClick}
+              onDeleteSucess={onDeleteTaskSucess}
             />
           ))}
         </div>
