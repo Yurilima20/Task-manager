@@ -26,13 +26,13 @@ const Button = ({
       size: "small",
     },
     disabled: {
-      true: "cursor-not-allowed opacity-50 hover:opacity-50",
+      true: "cursor-not-allowed opacity-50 hover:opacity-100",
     },
   })
 
   return (
     <button
-      className={button({ color, size, disable: rest.disabled, className })}
+      className={button({ color, size, disabled: rest.disabled, className })}
       {...rest}
     >
       {children}

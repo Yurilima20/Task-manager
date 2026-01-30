@@ -19,7 +19,7 @@ const AddTaskDialog = ({
   onSubmitError,
 }) => {
   const [errors, setErros] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   const nodeRef = useRef()
   const titleRef = useRef()
@@ -151,7 +151,7 @@ const AddTaskDialog = ({
                     onClick={handleSaveClick}
                     disabled={isLoading}
                   >
-                    {isLoading && <LoaderIcon className="mr-2 animate-spin" />}
+                    {isLoading && <LoaderIcon className="animate-spin" />}
                     Salvar
                   </Button>
                 </div>
