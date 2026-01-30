@@ -1,24 +1,10 @@
 {
   "tasks": [
     {
-      "id": "5",
-      "title": "descansar",
-      "description": "o homi não é de ferro, é ?",
-      "time": "evening",
-      "status": "not_started"
-    },
-    {
       "id": "6",
       "title": "meditar",
       "description": "Meditar durante 10 minutos",
       "time": "evening",
-      "status": "not_started"
-    },
-    {
-      "id": "4a5d94fd-5bb7-4f65-99d1-0462ff535015",
-      "title": "editadao agora mesmo bila",
-      "time": "evening",
-      "description": "teste ",
       "status": "not_started"
     },
     {
