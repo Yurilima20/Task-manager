@@ -1,4 +1,5 @@
 import AddIcon from "./add.svg?react"
+import BackIcon from "./Back.svg?react"
 import CheckIconc from "./check.svg?react"
 import CloudSun from "./cloud-sun.svg?react"
 import DatailIcon from "./details.svg?react"
@@ -8,9 +9,11 @@ import MoonIcon from "./moon.svg?react"
 import SunIcon from "./sun.svg?react"
 import TaskIcon from "./tasks.svg?react"
 import TrashIcon from "./trash.svg?react"
+import Vector from "./Vector.svg?react"
 
 export {
   AddIcon,
+  BackIcon,
   CheckIconc,
   CloudSun,
   DatailIcon,
@@ -20,4 +23,5 @@ export {
   SunIcon,
   TaskIcon,
   TrashIcon,
+  Vector,
 }
