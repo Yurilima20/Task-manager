@@ -4,6 +4,7 @@ import DatailIcon from "../assets/icons/details.svg?react"
 import TrashIcon from "../assets/icons/trash.svg?react"*/
 import PropTypes from "prop-types"
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import { toast } from "sonner"
 
 import {
@@ -60,7 +61,7 @@ const TaskItem = ({ tasks, handleTaskCheckboxClick, onDeleteSucess }) => {
           />
           {tasks.status === "done" && <CheckIconc />}
           {tasks.status === "in_progress" && (
-            <LoaderIcon className="animate-spin" />
+            <LoaderIcon className="animate-spin text-brand-white" />
           )}
         </label>
 
@@ -79,9 +80,9 @@ const TaskItem = ({ tasks, handleTaskCheckboxClick, onDeleteSucess }) => {
           )}
         </Button>
 
-        <a href="#" className="transition hover:opacity-75">
+        <Link to={`/task/${tasks.id}`} className="transition hover:opacity-75">
           <DatailIcon />
-        </a>
+        </Link>
       </div>
     </div>
   )
