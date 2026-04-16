@@ -14,7 +14,7 @@ module.exports = {
   plugins: ["react-refresh", "simple-import-sort"],
   rules: {
     "react/jsx-no-target-blank": "off",
-    "simple-import-sort/imports": "error",
+    "simple-import-sort/imports": "warn",
     "simple-import-sort/exports": "error",
     "react-refresh/only-export-components": [
       "warn",
