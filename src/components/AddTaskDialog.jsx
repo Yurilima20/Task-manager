@@ -5,53 +5,57 @@ import { useRef } from "react"
 import { createPortal } from "react-dom"
 import { useForm } from "react-hook-form"
 import { CSSTransition } from "react-transition-group"
+import { toast } from "sonner"
 import { v4 } from "uuid"
 
 import { LoaderIcon } from "../assets/icons"
+import { useAddTask } from "../hooks/useTasks"
 import Button from "./Button"
 import Input from "./Input"
 import TimeSelect from "./TimeSelect"
 
-const AddTaskDialog = ({
-  isOpen,
-  handleClose,
-  onSubmitSucess,
-  onSubmitError,
-}) => {
+const AddTaskDialog = ({ isOpen, handleClose }) => {
   const nodeRef = useRef()
+  const { mutate: addTask } = useAddTask()
 
   const {
     register,
     formState: { errors, isSubmitting },
     handleSubmit,
     reset,
-  } = useForm()
-
-  const handleSaveClick = async (data) => {
-    //chamar a aPI para adicionar a tarefa
-    const task = {
-      id: v4(),
-      title: data.title.trim(),
-      time: data.time.trim(),
-      description: data.description.trim(),
-      status: "not_started",
-    }
-
-    const response = await fetch("http://localhost:3000/tasks", {
-      method: "POST",
-      body: JSON.stringify(task),
-    })
-    if (!response.ok) {
-      return onSubmitError()
-    }
-
-    onSubmitSucess(task)
-    handleClose()
-    reset({
+  } = useForm({
+    defaultValues: {
       title: "",
       time: "morning",
       description: "",
-    })
+    },
+  })
+
+  const handleSaveClick = async (data) => {
+    //chamar a aPI para adicionar a tarefa
+    addTask(
+      {
+        id: v4(),
+        title: data.title.trim(),
+        time: data.time.trim(),
+        description: data.description.trim(),
+        status: "not_started",
+      },
+      {
+        onSuccess: () => {
+          handleClose()
+          reset({
+            title: "",
+            time: "morning",
+            description: "",
+          })
+          toast.success("Tarefa adicionada com sucesso!")
+        },
+        onError: () => {
+          toast.error("Erro ao adicionar tarefa. Tente novamente.")
+        },
+      }
+    )
   }
 
   const handleCancelClick = () => {

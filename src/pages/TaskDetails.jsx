@@ -1,5 +1,3 @@
-import { useEffect } from "react"
-import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { Link, useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
@@ -15,10 +13,18 @@ import Button from "../components/Button.jsx"
 import Input from "../components/Input.jsx"
 import Sidebar from "../components/Sidebar.jsx"
 import TimeSelect from "../components/TimeSelect.jsx"
+import { useDeleteTask } from "../hooks/data/use-delete-task.js"
+import { useGetTask } from "../hooks/data/use-get-task.js"
+import { useUpdateTask } from "../hooks/data/use-update-task.js"
 
 const TaskDetailsPage = () => {
   const { taskId } = useParams()
-  const [task, setTask] = useState()
+  const { mutate: updateTask } = useUpdateTask(taskId)
+  const { mutate: deleteTask } = useDeleteTask(taskId)
+  const { data: task } = useGetTask({
+    taskId,
+    onSuccess: reset,
+  })
   const navigate = useNavigate()
   const {
     register,
@@ -31,46 +37,25 @@ const TaskDetailsPage = () => {
     navigate(-1)
   }
 
-  useEffect(() => {
-    const fetchTask = async () => {
-      const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
-        method: "GET",
-      })
-      const data = await response.json()
-      setTask(data)
-      reset(data)
-      console.log(data)
-    }
-
-    fetchTask()
-  }, [taskId, reset])
-
   const handleSaveClick = async (data) => {
-    const response = await fetch(`http://localhost:3000/tasks/${task.id}`, {
-      method: "PATCH",
-      body: JSON.stringify({
-        title: data.title.trim(),
-        time: data.time.trim(),
-        description: data.description.trim(),
-      }),
+    updateTask(data, {
+      onSuccess: () => {
+        toast.success("Tarefa salva com sucesso!")
+      },
+      onError: () => {
+        toast.error("Ocorreu um erro ao salvar a tarefa.")
+      },
     })
-    if (!response.ok) {
-      return toast.error("Erro ao salvar tarefa. Please try again.")
-    }
-    const newTask = await response.json()
-    setTask(newTask)
-    toast.success("Tarefa salva com sucesso!")
   }
 
   const handleDeleteClick = async () => {
-    const response = await fetch(`http://localhost:3000/tasks/${task.id}`, {
-      method: "DELETE",
+    deleteTask(undefined, {
+      onSuccess: () => {
+        toast.success("Tarefa deletada com sucesso!")
+        navigate(-1)
+      },
+      onError: () => toast.error("Ocorreu um erro ao deletar a tarefa."),
     })
-    if (!response.ok) {
-      return toast.error("Erro ao remover tarefa. Please try again.")
-    }
-    toast.success("Tarefa removida com sucesso!")
-    navigate(-1)
   }
 
   return (

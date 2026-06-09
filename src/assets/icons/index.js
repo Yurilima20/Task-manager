@@ -8,8 +8,10 @@ import LoaderIcon from "./loader.svg?react"
 import MoonIcon from "./moon.svg?react"
 import SunIcon from "./sun.svg?react"
 import TaskIcon from "./tasks.svg?react"
+import Tasks2Icon from "./tasks2.svg?react"
 import TrashIcon from "./trash.svg?react"
 import Vector from "./Vector.svg?react"
+import WaterGlassIcon from "./water-glass.svg?react"
 
 export {
   AddIcon,
@@ -22,6 +24,8 @@ export {
   MoonIcon,
   SunIcon,
   TaskIcon,
+  Tasks2Icon,
   TrashIcon,
   Vector,
+  WaterGlassIcon,
 }
