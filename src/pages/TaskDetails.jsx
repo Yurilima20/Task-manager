@@ -1,21 +1,20 @@
 import { useForm } from "react-hook-form"
-import { Link, useParams } from "react-router-dom"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { toast } from "sonner"
 
 import {
-  BackIcon,
+  ArrowLeftIcon,
+  ChevronRightIcon,
   LoaderIcon,
   TrashIcon,
-  Vector,
-} from "../assets/icons/index.js"
-import Button from "../components/Button.jsx"
-import Input from "../components/Input.jsx"
-import Sidebar from "../components/Sidebar.jsx"
-import TimeSelect from "../components/TimeSelect.jsx"
-import { useDeleteTask } from "../hooks/data/use-delete-task.js"
-import { useGetTask } from "../hooks/data/use-get-task.js"
-import { useUpdateTask } from "../hooks/data/use-update-task.js"
+} from "../assets/icons"
+import Button from "../components/Button"
+import Input from "../components/Input"
+import Sidebar from "../components/Sidebar"
+import TimeSelect from "../components/TimeSelect"
+import { useDeleteTask } from "../hooks/data/use-delete-task"
+import { useGetTask } from "../hooks/data/use-get-task"
+import { useUpdateTask } from "../hooks/data/use-update-task"
 
 const TaskDetailsPage = () => {
   const { taskId } = useParams()
@@ -23,7 +22,7 @@ const TaskDetailsPage = () => {
   const { mutate: deleteTask } = useDeleteTask(taskId)
   const { data: task } = useGetTask({
     taskId,
-    onSuccess: reset,
+    onSuccess: (task) => reset(task),
   })
   const navigate = useNavigate()
   const {
@@ -62,19 +61,21 @@ const TaskDetailsPage = () => {
     <div className="flex">
       <Sidebar />
       <div className="w-full space-y-6 px-8 py-16">
+        {/* barra do topo */}
         <div className="flex w-full justify-between">
+          {/* parte da esquerda */}
           <div>
             <button
               onClick={handleBackClick}
               className="mb-3 flex h-8 w-8 items-center justify-center rounded-full bg-brand-primary"
             >
-              <BackIcon />
+              <ArrowLeftIcon />
             </button>
-            <div className="flex items-center gap-1 text-2xl">
-              <Link className="text-brand-text- cursor-pointer" to="/">
+            <div className="flex items-center gap-1 text-xs">
+              <Link className="cursor-pointer text-brand-text-gray" to="/">
                 Minhas tarefas
               </Link>
-              <Vector className="text-brand-text-gray" />
+              <ChevronRightIcon className="text-brand-text-gray" />
               <span className="font-semibold text-brand-primary">
                 {task?.title}
               </span>
@@ -94,18 +95,18 @@ const TaskDetailsPage = () => {
           </Button>
         </div>
 
-        {/* dados da tarefa */}
         <form onSubmit={handleSubmit(handleSaveClick)}>
+          {/* dados da tarefa */}
           <div className="space-y-6 rounded-xl bg-brand-white p-6">
             <div>
               <Input
                 id="title"
                 label="Título"
                 {...register("title", {
-                  required: "Título é obrigatório",
+                  required: "O título é obrigatório.",
                   validate: (value) => {
-                    if (value.trim() === "") {
-                      return "Título não pode ser vazio"
+                    if (!value.trim()) {
+                      return "O título não pode ser vazio."
                     }
                     return true
                   },
@@ -113,23 +114,25 @@ const TaskDetailsPage = () => {
                 errorMessage={errors?.title?.message}
               />
             </div>
+
             <div>
               <TimeSelect
                 {...register("time", {
-                  required: "Tempo é obrigatório",
+                  required: "O horário é obrigatório.",
                 })}
                 errorMessage={errors?.time?.message}
               />
             </div>
+
             <div>
               <Input
                 id="description"
                 label="Descrição"
                 {...register("description", {
-                  required: "Descrição é obrigatória",
+                  required: "A descrição é obrigatória.",
                   validate: (value) => {
-                    if (value.trim() === "") {
-                      return "Descrição não pode ser vazia"
+                    if (!value.trim()) {
+                      return "A descrição não pode ser vazia."
                     }
                     return true
                   },
@@ -138,17 +141,13 @@ const TaskDetailsPage = () => {
               />
             </div>
           </div>
-
-          {/* botões de cancelar e salvar */}
-          <div className="flex w-full justify-end gap-3 pt-4">
-            <Button size="large" color="secondary" onClick={handleBackClick}>
-              Cancelar
-            </Button>
+          {/* botão de salvar */}
+          <div className="flex w-full justify-end gap-3">
             <Button
               size="large"
               color="primary"
-              type="submit"
               disabled={isSubmitting}
+              type="submit"
             >
               {isSubmitting && <LoaderIcon className="animate-spin" />}
               Salvar
@@ -159,4 +158,5 @@ const TaskDetailsPage = () => {
     </div>
   )
 }
+
 export default TaskDetailsPage

@@ -6,7 +6,6 @@ import { useGetTasks } from "../hooks/data/use-get-tasks"
 
 const HomePage = () => {
   const { data: tasks } = useGetTasks()
-
   return (
     <div className="flex">
       <Sidebar />
@@ -29,7 +28,7 @@ const HomePage = () => {
             </div>
           </div>
           <div className="flex items-center justify-center space-y-6 rounded-[10px] bg-white p-6">
-            <p className="text-brand-primary">
+            <p className="text-brand-dark-gray">
               Cada pequena ação de hoje te aproxima das grandes conquistas de
               amanhã. Faça o que precisa ser feito!
             </p>
