@@ -7,7 +7,7 @@ import { api } from "../../lib/axios"
 export const useDeleteTask = (taskId) => {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationKey: taskMutationKeys.delete(taskId),
+    mutationKey: taskMutationKeys.delete(),
     mutationFn: async () => {
       const { data: deletedTask } = await api.delete(`/tasks/${taskId}`)
       return deletedTask

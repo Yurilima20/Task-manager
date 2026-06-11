@@ -1,4 +1,4 @@
-import { LoaderIcon, TaskIcon, Tasks2Icon } from "../assets/icons/index.js"
+import { LoaderIcon, Tasks2Icon, TasksIcon } from "../assets/icons"
 import { useGetTasks } from "../hooks/data/use-get-tasks"
 import DashboardCard from "./DashboardCard"
 
@@ -31,7 +31,7 @@ const DashboardCards = () => {
         secondaryText="Tarefas em andamento"
       />
       <DashboardCard
-        icon={<TaskIcon />}
+        icon={<TasksIcon />}
         mainText={completedTasks}
         secondaryText="Tarefas concluídas"
       />

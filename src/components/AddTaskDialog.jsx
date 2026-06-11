@@ -9,7 +9,7 @@ import { toast } from "sonner"
 import { v4 } from "uuid"
 
 import { LoaderIcon } from "../assets/icons"
-import { useAddTask } from "../hooks/useTasks"
+import { useAddTask } from "../hooks/data/use-add-task"
 import Button from "./Button"
 import Input from "./Input"
 import TimeSelect from "./TimeSelect"

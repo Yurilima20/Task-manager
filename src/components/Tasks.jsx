@@ -3,8 +3,8 @@ import TrashIcon from "../assets/icons/trash.svg?react"
 import SunIcon from "../assets/icons/sun.svg?react"
 import CloudSun from "../assets/icons/cloud-sun.svg?react"
 import MoonIcon from "../assets/icons/moon.svg?react" */
-import { CloudSun, MoonIcon, SunIcon } from "../assets/icons/index.js"
-import { useGetTasks } from "../hooks/useGetTasks"
+import { CloudSunIcon, MoonIcon, SunIcon } from "../assets/icons"
+import { useGetTasks } from "../hooks/data/use-get-tasks"
 import Header from "./Header.jsx"
 import TaskItem from "./TaskItem"
 import TasksSeparator from "./TasksSeparator"
@@ -28,19 +28,19 @@ const Tasks = () => {
             </p>
           )}
           {morningTasks?.map((task) => (
-            <TaskItem key={task.id} tasks={task} />
+            <TaskItem key={task.id} task={task} />
           ))}
         </div>
 
         <div className="my-6 space-y-3">
-          <TasksSeparator title="Tarde" icon={<CloudSun />} />
+          <TasksSeparator title="Tarde" icon={<CloudSunIcon />} />
           {afternoonTasks?.length === 0 && (
             <p className="text-center text-sm text-brand-text-gray">
               Nenhuma tarefa para este período.
             </p>
           )}
           {afternoonTasks?.map((task) => (
-            <TaskItem key={task.id} tasks={task} />
+            <TaskItem key={task.id} task={task} />
           ))}
         </div>
 
@@ -52,7 +52,7 @@ const Tasks = () => {
             </p>
           )}
           {eveningTasks?.map((task) => (
-            <TaskItem key={task.id} tasks={task} />
+            <TaskItem key={task.id} task={task} />
           ))}
         </div>
       </div>
